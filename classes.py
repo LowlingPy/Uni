@@ -8,11 +8,10 @@ def calculate_age(date_time):
 
 
 class Person:
-
-    def __init__(self, first_name, last_name, id, birthday, *args, **kwargs):
+    def __init__(self, first_name, last_name, id_, birthday, *args, **kwargs):
         self.first_name = first_name
         self.last_name = last_name
-        self.id = id
+        self.id = id_
         self.birthday = birthday
 
     @property
@@ -26,9 +25,11 @@ class Person:
 
 class Employee(Person):
 
-    def __init__(self, first_name, last_name, id, birthday, employees_id, contract_start_date, salary, job_title, *args,
-                 **kwargs):
-        super().__init__(first_name, last_name, id, birthday, *args, **kwargs)
+    def __init__(
+            self, first_name, last_name, id, birthday, employees_id, contract_start_date, salary, job_title, *args,
+            **kwargs
+    ):
+        super().__init__(first_name, last_name, id_, birthday, *args, **kwargs)
         self.employees_id = employees_id
         self.contract_start_date = contract_start_date
         self.salary = salary
@@ -52,10 +53,14 @@ class Teacher(Employee):
     p_a_report = []
     teaching_time = []
 
-    def __init__(self, first_name, last_name, id, birthday, employees_id, contract_start_date, salary, teacher_id,
-                 field_of_study, *args, **kwargs):
-        super().__init__(first_name, last_name, id, birthday, employees_id, contract_start_date, salary, 'Teacher',
-                         *args, **kwargs)
+    def __init__(
+            self, first_name, last_name, id_, birthday, employees_id, contract_start_date, salary, teacher_id, 
+            field_of_study, *args, **kwargs
+    ):
+        super().__init__(
+            first_name, last_name, id_, birthday, employees_id, contract_start_date, salary, 'Teacher',
+            *args, **kwargs
+        )
         self.teacher_id = teacher_id
         self.field_of_study = field_of_study
         self.rate = 'not set'
@@ -70,7 +75,6 @@ class Teacher(Employee):
         '''
 
     def p_a_check(self, status):
-        # `status` should be either 'p' for present or 'a' for absent
         if status.lower() not in ['p', 'a']:
             raise ValueError("Status must be 'p' for present or 'a' for absent.")
         Teacher.p_a_report.append((datetime.now(), status))
@@ -83,7 +87,6 @@ class Teacher(Employee):
             self.rate = average
 
     def set_teaching_time(self, classes):
-        # `classes` should be a list of tuples with (title, class_day, class_time)
         for class_info in classes:
             if len(class_info) != 3:
                 raise ValueError("Each class info must be a tuple of (title, class day, class time).")
@@ -94,8 +97,8 @@ class Student(Person):
     p_a_report = []
     classes_time = []
 
-    def __init__(self, first_name, last_name, id, birthday, number_of_terms, number_of_units, gpa, *args, **kwargs):
-        super().__init__(first_name, last_name, id, birthday, *args, **kwargs)
+    def __init__(self, first_name, last_name, id_, birthday, number_of_terms, number_of_units, gpa, *args, **kwargs):
+        super().__init__(first_name, last_name, id_, birthday, *args, **kwargs)
         self.number_of_terms = number_of_terms
         self.number_of_units = number_of_units
         self.gpa = gpa
@@ -111,13 +114,11 @@ class Student(Person):
         '''
 
     def p_a_check(self, status):
-        # `status` should be either 'p' for present or 'a' for absent
         if status.lower() not in ['p', 'a']:
             raise ValueError("Status must be 'p' for present or 'a' for absent.")
         Student.p_a_report.append((datetime.now(), status))
 
     def set_classes_time(self, classes):
-        # `classes` should be a list of tuples with (title, class_day, class_time)
         for class_info in classes:
             if len(class_info) != 3:
                 raise ValueError("Each class info must be a tuple of (title, class day, class time).")
@@ -125,10 +126,10 @@ class Student(Person):
 
 
 class Course:
-    def __init__(self, course_title, course_id, type, *args, **kwargs):
+    def __init__(self, course_title, course_id, type_, *args, **kwargs):
         self.course_title = course_title
         self.course_id = course_id
-        self.type = type
+        self.type = type_
 
 
 # Example usage
